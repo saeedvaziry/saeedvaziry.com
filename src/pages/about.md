@@ -3,7 +3,11 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-My name is Saeed Vaziry. I am a software engineer since 2012! I work as a tech lead in the e-commerce and payment industry by day ☀️ and a developer who builds FREE and open-source projects by night 🌙.
+<div class="flex items-start justify-between">
+    <p>My name is Saeed Vaziry. I am a software engineer since 2012! I work as a tech lead in the e-commerce and payment industry by day ☀️ and a developer who builds FREE and open-source projects by night 🌙.</p>
+    <img src="/avatar.jpg" alt="Saeed Vaziry" class="rounded-lg size-[150px] object-cover ml-4">
+</div>
+
 
 ## Tech Stack
 
