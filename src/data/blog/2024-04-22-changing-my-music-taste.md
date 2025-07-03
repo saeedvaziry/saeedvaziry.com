@@ -48,6 +48,8 @@ PostRockNation almost includes all of the bands doing Post-Rock!
 
 You can find them on [the website](https://postrocknation.com/bands), well organized and easy to find via the powerful search bar!
 
+Don't miss the [Largest Post-Rock release archive](https://postrocknation.com/page/release-archive)!
+
 Also, you can [discover](https://postrocknation.com/discover) bands if you think you are lucky 🤞
 
 ### Band Management
