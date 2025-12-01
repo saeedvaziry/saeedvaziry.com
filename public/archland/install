@@ -1,0 +1,1 @@
+eval "$(curl -fsSL https://raw.githubusercontent.com/archland-linux/archland/refs/heads/main/install.sh)"
