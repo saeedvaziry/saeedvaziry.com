@@ -3,7 +3,7 @@ author: Saeed Vaziry
 pubDatetime: 2025-08-11T20:13:00Z
 title: Inertia, HTMX, Livewire and Filament, I tried all on Vito
 slug: inertia-htmx-livewire-and-filament-I-tried-all-on-vito
-featured: true
+featured: false
 draft: false
 tags:
   - vitodeploy
@@ -19,7 +19,6 @@ I had an interesting journey and struggles with tech stacks in VitoDeploy! Boy..
 
 **Disclaimer, This post is not about Pros and Cons about these stacks, Its just my experience in one project.**
 
-
 ## How it started
 
 Did you know Vito initially built with Inertia?! Initially I was planning to make money out of it. So kinda built it as a SaaS with Inertia and Vue and added subscriptions and plans. Then I changed my mind and I decided to make it FREE and open source. While doing it, I realised I am putting a lot of effort into the frontend part and then this story started...
@@ -34,7 +33,7 @@ I had Actions, Jobs, SSH commands and then there was Livewire's blade files and 
 
 I said I cannot continue with this, its getting bigger and massive. I decided to make things less complicated and cut some stuff in the middle. Then this idea came up that to do things a bit more traditionally :D...
 
-## HTMX, Simple and easy to JUST Ship!
+## HTMX, Simple and easy to JUST Ship
 
 I got to know what HTMX is and I was amazed how simple it is! So I said lets make vito simpler with HTMX and focus on shipping the features users need. Migrating everything to HTMX didn't really take much and I managed to cut a lot of files out and make things way more simpler and straitforward.
 
@@ -83,5 +82,3 @@ Well, First of all Inertia makes the communication between server and the fronte
 Second, React's community is rich and everything is there and there is no need to build it myself.
 
 Third, Having full control over the frontend made the current beautiful dashboard and better UX that you can easily jump to servers and sites and navigate between them. isn't it cool?
-
-
