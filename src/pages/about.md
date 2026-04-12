@@ -13,10 +13,29 @@ title: "About"
 
 I am focused on PHP and Laravel but after +10 years of experience in the software industry, I can adopt to any tech stack easily.
 
-## Projects
+## Free and Open Source Projects
 
-Currently I am building and maintaining these projects:
+**Actively maintained**
 
-- [VitoDeploy](https://vitodeploy.com) - Free, Open-Source and Self-Hosted Server Management Tool
-- [TweakPHP](https://tweakphp.com) - A Desktop Application for PHP Developers
-- [FreeIPAPI](https://freeipapi.com) - Free IP Geolocation API
+- VitoDeploy [https://vitodeploy.com]
+- Draftila [https://draftila.com]
+- Muxy [https://github.com/muxy-app/muxy]
+- TweakPHP [https://tweakphp.com]
+- Wigify [https://github.com/wigify/wigify]
+
+**Support and bug fixes only**
+
+- PHP-SaaS [https://php-saas.com]
+- Laravel Monitoring [https://github.com/saeedvaziry/laravel-monitoring]
+- Laravel IP2Location [https://github.com/saeedvaziry/ip2location]
+- Laravel Async [https://github.com/saeedvaziry/laravel-async]
+
+## Paid and Commercial Projects
+
+- FreeIPAPI [https://freeipapi.com]
+- Capty [https://capty.app]
+- Waitlio [https://waitlio.com]
+
+## Fun Projects
+
+- Chilluzzle [https://chilluzzle.com]
