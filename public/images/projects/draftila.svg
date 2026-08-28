@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Draftila placeholder screenshot">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf8f0"/>
+      <stop offset="0.55" stop-color="#faf6ef"/>
+      <stop offset="1" stop-color="#f4e5d7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <g stroke="#9a3412" opacity="0.10" stroke-width="2">
+      <line x1="880" y1="675" x2="1200" y2="355"/>
+      <line x1="960" y1="675" x2="1200" y2="435"/>
+      <line x1="1040" y1="675" x2="1200" y2="515"/>
+      <line x1="1120" y1="675" x2="1200" y2="595"/>
+    </g>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="96" y="356" font-size="128" font-weight="700" fill="#211d17">Draftila</text>
+    <text x="98" y="418" font-family="Verdana, Geneva, sans-serif" font-size="30" letter-spacing="4" fill="#9a3412">DRAFTILA.COM</text>
+  </g>
+  <rect x="1.5" y="1.5" width="1197" height="672" fill="none" stroke="#e6ddcb" stroke-width="3"/>
+</svg>
