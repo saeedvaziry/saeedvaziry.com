@@ -21,6 +21,12 @@ const isActive = (path: string) => {
 
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
+
+export interface Props {
+  wide?: boolean;
+}
+
+const { wide = false } = Astro.props;
 ---
 
 <header>
@@ -33,7 +39,10 @@ const isActive = (path: string) => {
   </a>
   <div
     id="nav-container"
-    class="mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row"
+    class:list={[
+      "mx-auto flex flex-col items-center justify-between sm:flex-row",
+      wide ? "max-w-6xl" : "max-w-3xl",
+    ]}
   >
     <div
       id="top-nav-wrap"

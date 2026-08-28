@@ -6,15 +6,19 @@ const currentYear = new Date().getFullYear();
 
 export interface Props {
   noMarginTop?: boolean;
+  wide?: boolean;
 }
 
-const { noMarginTop = false } = Astro.props;
+const { noMarginTop = false, wide = false } = Astro.props;
 ---
 
 <footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
   <Hr noPadding />
   <div
-    class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"
+    class:list={[
+      "flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4",
+      wide ? "mx-auto max-w-6xl px-4" : "mx-auto max-w-3xl px-4",
+    ]}
   >
     <Socials centered />
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
