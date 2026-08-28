@@ -18,10 +18,12 @@ I am focused on PHP and Laravel but after +10 years of experience in the softwar
 **Actively maintained**
 
 - VitoDeploy [https://vitodeploy.com]
-- Draftila [https://draftila.com]
+- Capty [https://capty.app]
 - Muxy [https://github.com/muxy-app/muxy]
+- Draftila [https://draftila.com]
 - TweakPHP [https://tweakphp.com]
-- Wigify [https://github.com/wigify/wigify]
+- FreeDraw [https://freedraw.dev]
+- Xal [https://xal.sh]
 
 **Support and bug fixes only**
 
@@ -33,7 +35,6 @@ I am focused on PHP and Laravel but after +10 years of experience in the softwar
 ## Paid and Commercial Projects
 
 - FreeIPAPI [https://freeipapi.com]
-- Capty [https://capty.app]
 - Waitlio [https://waitlio.com]
 
 ## Fun Projects

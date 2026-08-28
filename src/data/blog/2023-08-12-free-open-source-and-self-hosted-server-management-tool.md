@@ -8,12 +8,12 @@ draft: false
 tags:
   - vitodeploy
   - project
-description: VitoDeploy — Free, Open-Source and Self-Hosted Server Management Tool
+description: VitoDeploy: Free, Open-Source and Self-Hosted Server Management Tool
 ---
 
 Recently, I released a beta version of [VitoDeploy](https://vitodeploy.com) 🎉
 
-VitoDeploy — Free, Open-Source and Self-Hosted Server Management Tool
+VitoDeploy: Free, Open-Source and Self-Hosted Server Management Tool
 
 ### Background
 
