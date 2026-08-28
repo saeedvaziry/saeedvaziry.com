@@ -1,0 +1,37 @@
+---
+const services = [
+  {
+    title: "AI strategy and audits",
+    description: "Find where AI actually pays off in your product and stack",
+  },
+  {
+    title: "LLM integration",
+    description: "RAG, agents, and evals wired into real codebases",
+  },
+  {
+    title: "Internal tooling and automation",
+    description: "AI-assisted workflows that save your team hours",
+  },
+  {
+    title: "Team enablement",
+    description: "Workshops and hands-on pairing that make AI stick",
+  },
+];
+---
+
+<section id="services" class="mx-auto max-w-6xl px-4 py-16">
+  <h2 class="font-display text-3xl sm:text-4xl">Services</h2>
+  <p class="mt-3 max-w-2xl text-foreground/75">
+    Practical AI help for companies that write software.
+  </p>
+  <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+    {
+      services.map(service => (
+        <li class="rounded-2xl border border-border bg-card p-6">
+          <h3 class="font-display text-xl">{service.title}</h3>
+          <p class="mt-2 text-foreground/75">{service.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

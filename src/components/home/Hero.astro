@@ -1,0 +1,35 @@
+---
+import { CAL_LINK } from "@/constants";
+---
+
+<section id="hero" class="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:pt-20">
+  <p
+    class="mb-4 text-sm font-medium tracking-[0.2em] text-accent uppercase"
+  >
+    Saeed Vaziry
+  </p>
+  <h1 class="font-display text-4xl leading-tight sm:text-6xl">
+    Software engineer.
+    <span class="block text-foreground/75">AI consultant for companies.</span>
+  </h1>
+  <p class="mt-6 max-w-2xl text-lg text-foreground/80">
+    I help companies adopt AI practically, from strategy and audits to
+    shipping LLM-powered features in production. Writing code since 2010.
+  </p>
+  <div class="mt-8 flex flex-wrap items-center gap-4">
+    <a
+      href={CAL_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground transition-colors hover:opacity-90"
+    >
+      Book a call
+    </a>
+    <a
+      href="/posts"
+      class="rounded-full border border-border px-6 py-3 font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+    >
+      Read the blog
+    </a>
+  </div>
+</section>

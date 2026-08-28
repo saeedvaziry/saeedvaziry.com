@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import Card from "@/components/Card.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import LinkButton from "@/components/LinkButton.astro";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+
+const posts = await getCollection("blog");
+const latestPosts = getSortedPosts(posts).slice(0, 3);
+---
+
+<section id="writing" class="mx-auto max-w-6xl px-4 py-16">
+  <h2 class="font-display text-3xl sm:text-4xl">Latest writing</h2>
+  <ul class="mt-6">
+    {latestPosts.map(data => <Card variant="h3" {...data} />)}
+  </ul>
+  <div class="mt-8">
+    <LinkButton href="/posts">
+      All posts
+      <IconArrowRight class="inline-block" />
+    </LinkButton>
+  </div>
+</section>
