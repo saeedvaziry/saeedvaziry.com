@@ -99,7 +99,7 @@ export default async post => {
       type: "div",
       props: {
         style: {
-          background: "#fefbfb",
+          background: "#faf6ef",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -114,8 +114,8 @@ export default async post => {
                 position: "absolute",
                 top: "-1px",
                 right: "-1px",
-                border: "4px solid #000",
-                background: "#ecebeb",
+                border: "4px solid #211d17",
+                background: "#f0e9dc",
                 opacity: "0.9",
                 borderRadius: "4px",
                 display: "flex",
@@ -130,8 +130,8 @@ export default async post => {
             type: "div",
             props: {
               style: {
-                border: "4px solid #000",
-                background: "#fefbfb",
+                border: "4px solid #211d17",
+                background: "#fffdf8",
                 borderRadius: "4px",
                 display: "flex",
                 justifyContent: "center",
@@ -159,6 +159,7 @@ export default async post => {
                           fontWeight: "bold",
                           maxHeight: "84%",
                           overflow: "hidden",
+                          fontFamily: "Fraunces",
                         },
                         children: post.data.title,
                       },
@@ -172,6 +173,7 @@ export default async post => {
                           width: "100%",
                           marginBottom: "8px",
                           fontSize: 28,
+                          fontFamily: "Inter",
                         },
                         children: [
                           {
