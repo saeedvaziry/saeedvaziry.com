@@ -65,16 +65,16 @@ You should receive a response like this
 
 ```json
 {
-    "name": "backup.zip",
-    "path_lower": "/path/to/backup.zip",
-    "path_display": "/path/to/backup.zip",
-    "id": "id:XXXXXXXXX",
-    "client_modified": "XXXXX",
-    "server_modified": "XXXXX",
-    "rev": "XXXXXXX",
-    "size": 111,
-    "is_downloadable": true,
-    "content_hash": "XXXXXXXX"
+  "name": "backup.zip",
+  "path_lower": "/path/to/backup.zip",
+  "path_display": "/path/to/backup.zip",
+  "id": "id:XXXXXXXXX",
+  "client_modified": "XXXXX",
+  "server_modified": "XXXXX",
+  "rev": "XXXXXXX",
+  "size": 111,
+  "is_downloadable": true,
+  "content_hash": "XXXXXXXX"
 }
 ```
 

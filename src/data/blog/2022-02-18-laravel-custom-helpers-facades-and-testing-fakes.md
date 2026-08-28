@@ -270,9 +270,9 @@ class ExampleTest extends TestCase
     public function test_ssh_command()
     {
         SSH::fake();
-        
+
         SSH::exec(new DirectoryListCommand());
-        
+
         SSH::assertExecuted(DirectoryListCommand::class);
     }
 }

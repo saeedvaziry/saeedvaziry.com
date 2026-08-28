@@ -35,13 +35,13 @@ Almost all of the IP API services are providing this feature and this will make 
 
 **Pros:**
 
-*   Easy to implement on the backend side
-*   No need to update databases for accuracy
+- Easy to implement on the backend side
+- No need to update databases for accuracy
 
 **Cons:**
 
-*   There might be network lag to connect to the IP API provider
-*   Relaying on the third-party service
+- There might be network lag to connect to the IP API provider
+- Relaying on the third-party service
 
 #### Database Usage
 
@@ -49,14 +49,14 @@ Some services are providing the Database itself. Meaning that you can download t
 
 **Pros:**
 
-*   You never hit the rate-limit of the service providers
-*   You can use it independently
+- You never hit the rate-limit of the service providers
+- You can use it independently
 
 **Cons:**
 
-*   Needs backend implementation
-*   Needs maintenance and regularly updating the database
-*   Expensive databases
+- Needs backend implementation
+- Needs maintenance and regularly updating the database
+- Expensive databases
 
 #### **Frontend usage**
 
@@ -64,13 +64,13 @@ Sometimes you don’t even want to involve your backend to show some features in
 
 **Pros:**
 
-*   No pressure on your backend servers
-*   Easy to implement and use
+- No pressure on your backend servers
+- Easy to implement and use
 
 **Cons:**
 
-*   Third-party API calls
-*   It might not work in all networks as the browser of the user is making the request.
+- Third-party API calls
+- It might not work in all networks as the browser of the user is making the request.
 
 **Note: Not all of the providers letting you to call their API via a Frontend script!**
 
@@ -90,14 +90,14 @@ Here I want to introduce you to freeipapi.com
 
 **Pros**:
 
-*   60 requests per minute (almost the higher in the market)
-*   No API key required. You can use it right away.
-*   Free and Fast.
-*   Unlimited requests in the paid plan.
-*   Well documented and sample codes for many languages.
+- 60 requests per minute (almost the higher in the market)
+- No API key required. You can use it right away.
+- Free and Fast.
+- Unlimited requests in the paid plan.
+- Well documented and sample codes for many languages.
 
 **Cons:**
 
-*   Doesn’t provide database
+- Doesn’t provide database
 
 If you enjoyed, Follow me on [Twitter](https://twitter.com/saeed_vz). I write more often

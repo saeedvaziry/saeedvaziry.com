@@ -55,8 +55,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 7.3, 7.4, 8.0, 8.1 ]
-        laravel: [ ^8.0 ]
+        php: [7.3, 7.4, 8.0, 8.1]
+        laravel: [^8.0]
 
     steps:
       - uses: actions/checkout@v2

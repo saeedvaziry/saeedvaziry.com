@@ -10,6 +10,7 @@ tags:
   - introduction
 description: Linkinize is a cloud bookmark management tool. If you work in a team and have many links, Read this post to see how you can save a lot of time and effort.
 ---
+
 [Linkinize](http://linkinize.com/) is a cloud bookmark management tool. If you work in a team and have many links, Read this post to see how you can save a lot of time and effort.
 
 Linkinize

@@ -8,7 +8,6 @@ title: "About"
     <img src="/avatar.jpg" alt="Saeed Vaziry" class="rounded-lg size-[150px] object-cover ml-4">
 </div>
 
-
 ## Tech Stack
 
 I am focused on PHP and Laravel but after +10 years of experience in the software industry, I can adopt to any tech stack easily.

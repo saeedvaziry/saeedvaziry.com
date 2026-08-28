@@ -27,16 +27,11 @@ After publishing Breeze’s files in your app you can customize the code. Breeze
 
 Taylor announced that Breeze now supports Livewire out of the box!
 
-* Blade with Alpine
-    
-* Livewire with Alpine
-    
-* React with Inertia
-    
-* Vue with Inertia
-    
-* API only
-    
+- Blade with Alpine
+- Livewire with Alpine
+- React with Inertia
+- Vue with Inertia
+- API only
 
 ### How it can be even cooler?
 

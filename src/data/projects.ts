@@ -1,8 +1,4 @@
-export type ProjectGroup =
-  | "active-oss"
-  | "maintained"
-  | "commercial"
-  | "fun";
+export type ProjectGroup = "active-oss" | "maintained" | "commercial" | "fun";
 
 export interface Project {
   name: string;
