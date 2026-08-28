@@ -3,11 +3,11 @@ import Hr from "./Hr.astro";
 import IconX from "@/assets/icons/IconX.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
-import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
+import { CAL_LINK } from "@/constants";
 
 const { pathname } = Astro.url;
 
@@ -79,12 +79,15 @@ const { wide = false } = Astro.props;
         >
           <li class="col-span-2">
             <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-              Posts
+              Blog
             </a>
           </li>
           <li class="col-span-2">
-            <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
-              Tags
+            <a
+              href="/#projects"
+              class:list={{ "active-nav": isActive("/#projects") }}
+            >
+              Projects
             </a>
           </li>
           <li class="col-span-2">
@@ -92,26 +95,16 @@ const { wide = false } = Astro.props;
               About
             </a>
           </li>
-          {
-            SITE.showArchives && (
-              <li class="col-span-2">
-                <LinkButton
-                  href="/archives"
-                  class:list={[
-                    "focus-outline flex justify-center p-3 sm:p-1",
-                    {
-                      "active-nav [&>svg]:stroke-accent": isActive("/archives"),
-                    },
-                  ]}
-                  ariaLabel="archives"
-                  title="Archives"
-                >
-                  <IconArchive class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Archives</span>
-                </LinkButton>
-              </li>
-            )
-          }
+          <li class="col-span-2">
+            <a
+              href={CAL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full bg-accent px-4 py-3 text-center font-medium text-accent-foreground hover:text-accent-foreground hover:opacity-90 sm:px-4 sm:py-1"
+            >
+              Book a call
+            </a>
+          </li>
           <li class="col-span-1 flex items-center justify-center">
             <LinkButton
               href="/search"
@@ -146,7 +139,7 @@ const { wide = false } = Astro.props;
       </nav>
     </div>
   </div>
-  <Hr />
+  <Hr wide={wide} />
 </header>
 
 <script>

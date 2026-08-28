@@ -1,6 +1,8 @@
 ---
 import Hr from "./Hr.astro";
 import Socials from "./Socials.astro";
+import IconRss from "@/assets/icons/IconRss.svg";
+import { CAL_LINK } from "@/constants";
 
 const currentYear = new Date().getFullYear();
 
@@ -10,10 +12,17 @@ export interface Props {
 }
 
 const { noMarginTop = false, wide = false } = Astro.props;
+
+const links = [
+  { label: "Book a call", href: CAL_LINK, external: true },
+  { label: "Archives", href: "/archives", external: false },
+  { label: "Tags", href: "/tags", external: false },
+  { label: "RSS", href: "/rss.xml", external: false, icon: IconRss },
+];
 ---
 
 <footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
-  <Hr noPadding />
+  <Hr noPadding wide={wide} />
   <div
     class:list={[
       "flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4",
@@ -26,5 +35,25 @@ const { noMarginTop = false, wide = false } = Astro.props;
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>All rights reserved.</span>
     </div>
+  </div>
+  <div
+    class:list={[
+      "flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pb-6 text-sm",
+      wide ? "mx-auto max-w-6xl px-4" : "mx-auto max-w-3xl px-4",
+    ]}
+  >
+    {
+      links.map(link => (
+        <a
+          href={link.href}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          class="inline-flex items-center gap-1.5 text-foreground/75 hover:text-accent"
+        >
+          {link.icon && <link.icon width={16} height={16} class="stroke-current" />}
+          {link.label}
+        </a>
+      ))
+    }
   </div>
 </footer>
