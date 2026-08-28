@@ -33,21 +33,47 @@ const {
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  headline: `${title}`,
-  image: `${socialImageURL}`,
-  datePublished: `${pubDatetime?.toISOString()}`,
-  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
-  author: [
-    {
-      "@type": "Person",
-      name: `${author}`,
-      ...(profile && { url: profile }),
-    },
-  ],
-};
+// Posts pass pubDatetime (required by the blog schema) and get BlogPosting
+// structured data; every other page gets WebSite + Person instead.
+const structuredData = pubDatetime
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: `${title}`,
+      image: `${socialImageURL}`,
+      datePublished: pubDatetime.toISOString(),
+      ...(modDatetime && { dateModified: modDatetime.toISOString() }),
+      author: [
+        {
+          "@type": "Person",
+          name: `${author}`,
+          ...(profile && { url: profile }),
+        },
+      ],
+    }
+  : {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          name: SITE.title,
+          url: SITE.website,
+        },
+        {
+          "@type": "Person",
+          name: `${author}`,
+          ...(profile && { url: profile }),
+          jobTitle: "AI Consultant",
+          knowsAbout: [
+            "AI strategy",
+            "LLM integration",
+            "PHP",
+            "Laravel",
+            "Open source",
+          ],
+        },
+      ],
+    };
 ---
 
 <!doctype html>
