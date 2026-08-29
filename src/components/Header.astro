@@ -26,7 +26,8 @@ export interface Props {
   wide?: boolean;
 }
 
-const { wide = false } = Astro.props;
+// All pages share the landing width so navigation never reflows the chrome.
+const { wide = true } = Astro.props;
 ---
 
 <header>

@@ -11,7 +11,8 @@ export interface Props {
   wide?: boolean;
 }
 
-const { noMarginTop = false, wide = false } = Astro.props;
+// All pages share the landing width so navigation never reflows the chrome.
+const { noMarginTop = false, wide = true } = Astro.props;
 
 const links = [
   { label: "Book a call", href: CAL_LINK, external: true },
