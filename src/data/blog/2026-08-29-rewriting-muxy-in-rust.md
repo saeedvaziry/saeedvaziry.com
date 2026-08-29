@@ -14,8 +14,6 @@ tags:
 description: I have decided to rewrite Muxy in Rust. I have found Rust to be a fascinating programming language, especially because of its safety features in the AI era.
 ---
 
-# Rewriting Muxy in Rust
-
 I have decided to rewrite [Muxy](https://github.com/muxy-app/muxy) in Rust. I have found Rust to be a fascinating programming language, especially because of its safety features in the AI era.
 
 ## TL;DR
