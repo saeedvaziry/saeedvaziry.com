@@ -1,10 +1,40 @@
 ---
+import type { ImageMetadata } from "astro";
 import {
   PROJECTS,
   PROJECT_GROUP_META,
   type Project,
   type ProjectGroup,
 } from "@/data/projects";
+
+// Inline SVGs can read the theme's CSS variables, so they follow light and
+// dark mode. Raster screenshots (when they replace the placeholders later)
+// render as plain images.
+const svgModules = import.meta.glob<string>("/src/assets/projects/*.svg", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+const rasterModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/*.{png,jpg,jpeg,webp,avif}",
+  { import: "default", eager: true }
+);
+
+function projectImage(slug: string) {
+  const svgKey = Object.keys(svgModules).find(key =>
+    key.endsWith(`/${slug}.svg`)
+  );
+  if (svgKey) {
+    return { kind: "svg" as const, html: svgModules[svgKey] };
+  }
+  const rasterKey = Object.keys(rasterModules).find(key =>
+    new RegExp(`/${slug}\\.(png|jpe?g|webp|avif)$`).test(key)
+  );
+  if (rasterKey) {
+    return { kind: "img" as const, src: rasterModules[rasterKey].default.src };
+  }
+  return null;
+}
 
 const featured: Project[] = PROJECTS.filter(project => project.featured);
 
@@ -32,31 +62,40 @@ const groups = GROUP_ORDER.map(group => ({
 
   <ul class="mt-10 grid gap-6 sm:grid-cols-2">
     {
-      featured.map(project => (
-        <li>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group block overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-accent"
-          >
-            <img
-              src={project.image}
-              alt={`${project.name} placeholder screenshot`}
-              width="1200"
-              height="675"
-              loading="lazy"
-              class="block w-full"
-            />
-            <div class="p-5">
-              <h3 class="font-display text-xl text-foreground group-hover:text-accent">
-                {project.name}
-              </h3>
-              <p class="mt-1 text-foreground/75">{project.tagline}</p>
-            </div>
-          </a>
-        </li>
-      ))
+      featured.map(project => {
+        const image = projectImage(project.image);
+        return (
+          <li>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-accent"
+            >
+              {image?.kind === "svg" && (
+                <div
+                  class="[&>svg]:block [&>svg]:h-auto [&>svg]:w-full"
+                  set:html={image.html}
+                />
+              )}
+              {image?.kind === "img" && (
+                <img
+                  src={image.src}
+                  alt={`${project.name} screenshot`}
+                  loading="lazy"
+                  class="block w-full"
+                />
+              )}
+              <div class="p-5">
+                <h3 class="font-display text-xl text-foreground group-hover:text-accent">
+                  {project.name}
+                </h3>
+                <p class="mt-1 text-foreground/75">{project.tagline}</p>
+              </div>
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 
