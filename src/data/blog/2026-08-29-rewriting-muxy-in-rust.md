@@ -52,7 +52,7 @@ I sorted these out in a way that would let me visually test the app after each t
 
 I needed to tackle the entire thing, but that's a very large scope, so breaking the idea into top-level phases and planning each phase into subphases was the right approach.
 
-So I made the Super [Plan skill](https://github.com/saeedvaziry/skills#super-plan) and started planning the entire migration, using it as a kind of orchestrator in the PLAN.md file.
+So I made the [Super Plan](https://github.com/saeedvaziry/skills#super-plan) skill and started planning the entire migration, using it as a kind of orchestrator in the PLAN.md file.
 
 The plan file was supposed to keep track of the top-level feature rewrites and serve as persistent memory for the migration.
 
