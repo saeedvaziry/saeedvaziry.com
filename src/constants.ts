@@ -8,8 +8,8 @@ import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
 import { SITE } from "@/config";
 
-// Placeholder booking link until the real cal.com URL is provided.
-export const CAL_LINK = "https://cal.com/saeedvaziry";
+// Primary contact link (mailto opens the visitor's mail client).
+export const CONTACT_LINK = "mailto:me@saeedvaziry.com";
 
 export const SOCIALS = [
   {
@@ -32,7 +32,7 @@ export const SOCIALS = [
   },
   {
     name: "Mail",
-    href: "mailto:sa.vaziry@gmail.com",
+    href: "mailto:me@saeedvaziry.com",
     linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },

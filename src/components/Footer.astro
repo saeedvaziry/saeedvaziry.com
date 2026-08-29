@@ -2,7 +2,7 @@
 import Hr from "./Hr.astro";
 import Socials from "./Socials.astro";
 import IconRss from "@/assets/icons/IconRss.svg";
-import { CAL_LINK } from "@/constants";
+import { CONTACT_LINK } from "@/constants";
 
 const currentYear = new Date().getFullYear();
 
@@ -15,7 +15,7 @@ export interface Props {
 const { noMarginTop = false, wide = true } = Astro.props;
 
 const links = [
-  { label: "Book a call", href: CAL_LINK, external: true },
+  { label: "Get in touch", href: CONTACT_LINK, external: false },
   { label: "Archives", href: "/archives", external: false },
   { label: "Tags", href: "/tags", external: false },
   { label: "RSS", href: "/rss.xml", external: false, icon: IconRss },

@@ -7,7 +7,7 @@ import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
-import { CAL_LINK } from "@/constants";
+import { CONTACT_LINK } from "@/constants";
 
 const { pathname } = Astro.url;
 
@@ -106,12 +106,10 @@ const { wide = true } = Astro.props;
           </li>
           <li class="col-span-2">
             <a
-              href={CAL_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={CONTACT_LINK}
               class="rounded-full bg-accent px-4 py-3 text-center font-medium text-accent-foreground hover:text-accent-foreground! hover:opacity-90 sm:px-4 sm:py-1"
             >
-              Book a call
+              Get in touch
             </a>
           </li>
           <li class="col-span-1 flex items-center justify-center">
