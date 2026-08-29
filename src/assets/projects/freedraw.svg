@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="FreeDraw placeholder screenshot">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="var(--card)"/>
+      <stop offset="0.55" stop-color="var(--background)"/>
+      <stop offset="1" stop-color="var(--accent-soft)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <g opacity="0.12"><circle cx="880" cy="90" r="4" fill="var(--accent)"/><circle cx="918" cy="90" r="4" fill="var(--accent)"/><circle cx="956" cy="90" r="4" fill="var(--accent)"/><circle cx="994" cy="90" r="4" fill="var(--accent)"/><circle cx="1032" cy="90" r="4" fill="var(--accent)"/><circle cx="1070" cy="90" r="4" fill="var(--accent)"/><circle cx="1108" cy="90" r="4" fill="var(--accent)"/><circle cx="1146" cy="90" r="4" fill="var(--accent)"/><circle cx="1184" cy="90" r="4" fill="var(--accent)"/><circle cx="880" cy="128" r="4" fill="var(--accent)"/><circle cx="918" cy="128" r="4" fill="var(--accent)"/><circle cx="956" cy="128" r="4" fill="var(--accent)"/><circle cx="994" cy="128" r="4" fill="var(--accent)"/><circle cx="1032" cy="128" r="4" fill="var(--accent)"/><circle cx="1070" cy="128" r="4" fill="var(--accent)"/><circle cx="1108" cy="128" r="4" fill="var(--accent)"/><circle cx="1146" cy="128" r="4" fill="var(--accent)"/><circle cx="1184" cy="128" r="4" fill="var(--accent)"/><circle cx="880" cy="166" r="4" fill="var(--accent)"/><circle cx="918" cy="166" r="4" fill="var(--accent)"/><circle cx="956" cy="166" r="4" fill="var(--accent)"/><circle cx="994" cy="166" r="4" fill="var(--accent)"/><circle cx="1032" cy="166" r="4" fill="var(--accent)"/><circle cx="1070" cy="166" r="4" fill="var(--accent)"/><circle cx="1108" cy="166" r="4" fill="var(--accent)"/><circle cx="1146" cy="166" r="4" fill="var(--accent)"/><circle cx="1184" cy="166" r="4" fill="var(--accent)"/><circle cx="880" cy="204" r="4" fill="var(--accent)"/><circle cx="918" cy="204" r="4" fill="var(--accent)"/><circle cx="956" cy="204" r="4" fill="var(--accent)"/><circle cx="994" cy="204" r="4" fill="var(--accent)"/><circle cx="1032" cy="204" r="4" fill="var(--accent)"/><circle cx="1070" cy="204" r="4" fill="var(--accent)"/><circle cx="1108" cy="204" r="4" fill="var(--accent)"/><circle cx="1146" cy="204" r="4" fill="var(--accent)"/><circle cx="1184" cy="204" r="4" fill="var(--accent)"/><circle cx="880" cy="242" r="4" fill="var(--accent)"/><circle cx="918" cy="242" r="4" fill="var(--accent)"/><circle cx="956" cy="242" r="4" fill="var(--accent)"/><circle cx="994" cy="242" r="4" fill="var(--accent)"/><circle cx="1032" cy="242" r="4" fill="var(--accent)"/><circle cx="1070" cy="242" r="4" fill="var(--accent)"/><circle cx="1108" cy="242" r="4" fill="var(--accent)"/><circle cx="1146" cy="242" r="4" fill="var(--accent)"/><circle cx="1184" cy="242" r="4" fill="var(--accent)"/></g>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="96" y="356" font-size="128" font-weight="700" fill="var(--foreground)">FreeDraw</text>
+    <text x="98" y="418" font-family="Verdana, Geneva, sans-serif" font-size="30" letter-spacing="4" fill="var(--accent)">FREEDRAW.DEV</text>
+  </g>
+  <rect x="1.5" y="1.5" width="1197" height="672" fill="none" stroke="var(--border)" stroke-width="3"/>
+</svg>

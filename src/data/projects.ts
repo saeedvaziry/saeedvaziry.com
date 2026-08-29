@@ -5,6 +5,7 @@ export interface Project {
   url: string;
   tagline: string;
   group: ProjectGroup;
+  /** File slug in src/assets/projects (svg inline for theme awareness, raster rendered as img). */
   image: string;
   featured?: boolean;
 }
@@ -22,7 +23,7 @@ export const PROJECTS: Project[] = [
     url: "https://vitodeploy.com",
     tagline: "Free and open-source server management and deployment",
     group: "active-oss",
-    image: "/images/projects/vitodeploy.svg",
+    image: "vitodeploy",
     featured: true,
   },
   {
@@ -30,23 +31,7 @@ export const PROJECTS: Project[] = [
     url: "https://capty.app",
     tagline: "Professional screen capture for macOS",
     group: "active-oss",
-    image: "/images/projects/capty.svg",
-    featured: true,
-  },
-  {
-    name: "TweakPHP",
-    url: "https://tweakphp.com",
-    tagline: "Desktop code editor for PHP",
-    group: "active-oss",
-    image: "/images/projects/tweakphp.svg",
-    featured: true,
-  },
-  {
-    name: "FreeIPAPI",
-    url: "https://freeipapi.com",
-    tagline: "Free and fast IP geolocation API",
-    group: "commercial",
-    image: "/images/projects/freeipapi.svg",
+    image: "capty",
     featured: true,
   },
   {
@@ -54,69 +39,85 @@ export const PROJECTS: Project[] = [
     url: "https://github.com/muxy-app/muxy",
     tagline: "Terminal multiplexer for macOS",
     group: "active-oss",
-    image: "/images/projects/muxy.svg",
+    image: "muxy",
+    featured: true,
+  },
+  {
+    name: "FreeIPAPI",
+    url: "https://freeipapi.com",
+    tagline: "Free and fast IP geolocation API",
+    group: "commercial",
+    image: "freeipapi",
+    featured: true,
+  },
+  {
+    name: "TweakPHP",
+    url: "https://tweakphp.com",
+    tagline: "Desktop code editor for PHP",
+    group: "active-oss",
+    image: "tweakphp",
   },
   {
     name: "Draftila",
     url: "https://draftila.com",
     tagline: "Visual database schema designer for Laravel",
     group: "active-oss",
-    image: "/images/projects/draftila.svg",
+    image: "draftila",
   },
   {
     name: "FreeDraw",
     url: "https://freedraw.dev",
     tagline: "Free drawing board for the web",
     group: "active-oss",
-    image: "/images/projects/freedraw.svg",
+    image: "freedraw",
   },
   {
     name: "Xal",
     url: "https://xal.sh",
     tagline: "AI coding agent for your terminal",
     group: "active-oss",
-    image: "/images/projects/xal.svg",
+    image: "xal",
   },
   {
     name: "PHP-SaaS",
     url: "https://php-saas.com",
     tagline: "Laravel SaaS starter kit",
     group: "maintained",
-    image: "/images/projects/php-saas.svg",
+    image: "php-saas",
   },
   {
     name: "Laravel Monitoring",
     url: "https://github.com/saeedvaziry/laravel-monitoring",
     tagline: "Server monitoring for Laravel applications",
     group: "maintained",
-    image: "/images/projects/laravel-monitoring.svg",
+    image: "laravel-monitoring",
   },
   {
     name: "Laravel IP2Location",
     url: "https://github.com/saeedvaziry/ip2location",
     tagline: "IP to location lookup for Laravel",
     group: "maintained",
-    image: "/images/projects/laravel-ip2location.svg",
+    image: "laravel-ip2location",
   },
   {
     name: "Laravel Async",
     url: "https://github.com/saeedvaziry/laravel-async",
     tagline: "Asynchronous queues for Laravel",
     group: "maintained",
-    image: "/images/projects/laravel-async.svg",
+    image: "laravel-async",
   },
   {
     name: "Waitlio",
     url: "https://waitlio.com",
     tagline: "Waitlist pages and launch emails",
     group: "commercial",
-    image: "/images/projects/waitlio.svg",
+    image: "waitlio",
   },
   {
     name: "Chilluzzle",
     url: "https://chilluzzle.com",
     tagline: "Relaxing daily puzzle game",
     group: "fun",
-    image: "/images/projects/chilluzzle.svg",
+    image: "chilluzzle",
   },
 ];
