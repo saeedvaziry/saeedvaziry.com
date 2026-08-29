@@ -17,7 +17,8 @@ export default defineConfig({
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
-      themes: { light: "min-light", dark: "night-owl" },
+      // Warm, editorial themes that sit well on the site palette.
+      themes: { light: "vitesse-light", dark: "vitesse-dark" },
       wrap: true,
     },
   },
