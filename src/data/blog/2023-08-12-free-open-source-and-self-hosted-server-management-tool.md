@@ -8,12 +8,12 @@ draft: false
 tags:
   - vitodeploy
   - project
-description: VitoDeploy — Free, Open-Source and Self-Hosted Server Management Tool
+description: "VitoDeploy: Free, Open-Source and Self-Hosted Server Management Tool"
 ---
 
 Recently, I released a beta version of [VitoDeploy](https://vitodeploy.com) 🎉
 
-VitoDeploy — Free, Open-Source and Self-Hosted Server Management Tool
+VitoDeploy: Free, Open-Source and Self-Hosted Server Management Tool
 
 ### Background
 
@@ -39,17 +39,17 @@ The web application is connecting to your Production servers and installs all ne
 
 It manages your
 
-*   Sites
-*   Databases
-*   Database Backups
-*   Firewall
-*   Services
-*   Cronjobs
-*   Queues
-*   SSL
-*   SSH Keys
-*   Source Controls
-*   and more…
+- Sites
+- Databases
+- Database Backups
+- Firewall
+- Services
+- Cronjobs
+- Queues
+- SSL
+- SSH Keys
+- Source Controls
+- and more…
 
 ### How to Install?
 

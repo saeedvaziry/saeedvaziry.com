@@ -2,9 +2,9 @@ export const SITE = {
   website: "https://saeedvaziry.com/", // replace this with your deployed domain
   author: "Saeed Vaziry",
   profile: "https://saeedvaziry.com/about",
-  desc: "Thoughts of an open source enthusiast",
+  desc: "Software engineer specializing in developer tools, from CLIs and internal platforms to AI-powered features. Writing code since 2012.",
   title: "Saeed Vaziry",
-  ogImage: "saeedvaziry-og.jpg",
+  ogImage: "",
   lightAndDarkMode: true,
   postPerIndex: 10,
   postPerPage: 10,

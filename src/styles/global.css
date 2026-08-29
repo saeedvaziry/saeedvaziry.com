@@ -5,19 +5,25 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --background: #faf6ef;
+  --foreground: #211d17;
+  --accent: #9a3412;
+  --muted: #f0e9dc;
+  --border: #e6ddcb;
+  --card: #fffdf8;
+  --accent-soft: #f4e5d7;
+  --accent-foreground: #fff8f0;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60bf;
-  --border: #ab4b08;
+  --background: #14161d;
+  --foreground: #e9e6df;
+  --accent: #e29a63;
+  --muted: #222634;
+  --border: #2f3442;
+  --card: #1a1d26;
+  --accent-soft: #2d2519;
+  --accent-foreground: #191410;
 }
 
 @theme inline {
@@ -26,6 +32,11 @@ html[data-theme="dark"] {
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-card: var(--card);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -38,7 +49,7 @@ html[data-theme="dark"] {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
+    @apply flex min-h-svh flex-col bg-background font-sans text-foreground selection:bg-accent/75 selection:text-background;
   }
   a,
   button {
@@ -47,10 +58,6 @@ html[data-theme="dark"] {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
-  }
-  section,
-  footer {
-    @apply mx-auto max-w-3xl px-4;
   }
 }
 

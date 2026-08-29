@@ -42,17 +42,27 @@ const time = datetime.format("hh:mm A"); // e.g., '08:30 PM'
   />
   {
     modDatetime && modDatetime > pubDatetime ? (
-      <span class:list={["text-sm italic", { "sm:text-base": size === "lg" }]}>
+      <span
+        class:list={[
+          "text-xs tracking-wider text-foreground/60 uppercase",
+          { "sm:text-sm": size === "lg" },
+        ]}
+      >
         Updated:
       </span>
     ) : (
       <span class="sr-only">Published:</span>
     )
   }
-  <span class:list={["text-sm italic", { "sm:text-base": size === "lg" }]}>
+  <span
+    class:list={[
+      "text-xs tracking-wider text-foreground/60 uppercase",
+      { "sm:text-sm": size === "lg" },
+    ]}
+  >
     <time datetime={datetime.toISOString()}>{date}</time>
     <span aria-hidden="true"> | </span>
     <span class="sr-only">&nbsp;at&nbsp;</span>
-    <span class="text-nowrap">{time}</span>
+    <span class="text-nowrap normal-case">{time}</span>
   </span>
 </div>

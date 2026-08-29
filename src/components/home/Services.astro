@@ -1,0 +1,38 @@
+---
+const services = [
+  {
+    title: "Developer tools",
+    description: "CLIs, SDKs, and desktop apps your team will actually use",
+  },
+  {
+    title: "AI-powered tools",
+    description: "LLM features, RAG, agents, and evals wired into your product",
+  },
+  {
+    title: "Internal tooling and automation",
+    description: "Custom workflows that save your team hours",
+  },
+  {
+    title: "Team enablement",
+    description: "Workshops and hands-on pairing that make the tools stick",
+  },
+];
+---
+
+<section id="services" class="mx-auto max-w-6xl px-4 py-16">
+  <h2 class="font-display text-3xl sm:text-4xl">Things I can help you with</h2>
+  <p class="mt-3 max-w-2xl text-foreground/75">
+    From quick internal scripts to public products, I plug in and build with
+    you.
+  </p>
+  <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+    {
+      services.map(service => (
+        <li class="rounded-2xl border border-border bg-card p-6">
+          <h3 class="font-display text-xl">{service.title}</h3>
+          <p class="mt-2 text-foreground/75">{service.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

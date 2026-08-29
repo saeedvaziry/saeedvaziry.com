@@ -8,7 +8,7 @@ export default async () => {
       type: "div",
       props: {
         style: {
-          background: "#fefbfb",
+          background: "#faf6ef",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -23,8 +23,8 @@ export default async () => {
                 position: "absolute",
                 top: "-1px",
                 right: "-1px",
-                border: "4px solid #000",
-                background: "#ecebeb",
+                border: "4px solid #211d17",
+                background: "#f0e9dc",
                 opacity: "0.9",
                 borderRadius: "4px",
                 display: "flex",
@@ -39,8 +39,8 @@ export default async () => {
             type: "div",
             props: {
               style: {
-                border: "4px solid #000",
-                background: "#fefbfb",
+                border: "4px solid #211d17",
+                background: "#fffdf8",
                 borderRadius: "4px",
                 display: "flex",
                 justifyContent: "center",
@@ -77,14 +77,18 @@ export default async () => {
                           {
                             type: "p",
                             props: {
-                              style: { fontSize: 72, fontWeight: "bold" },
+                              style: {
+                                fontSize: 72,
+                                fontWeight: "bold",
+                                fontFamily: "Fraunces",
+                              },
                               children: SITE.title,
                             },
                           },
                           {
                             type: "p",
                             props: {
-                              style: { fontSize: 28 },
+                              style: { fontSize: 28, fontFamily: "Inter" },
                               children: SITE.desc,
                             },
                           },
@@ -100,6 +104,7 @@ export default async () => {
                           width: "100%",
                           marginBottom: "8px",
                           fontSize: 28,
+                          fontFamily: "Inter",
                         },
                         children: {
                           type: "span",

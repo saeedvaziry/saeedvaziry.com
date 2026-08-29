@@ -3,11 +3,11 @@ import Hr from "./Hr.astro";
 import IconX from "@/assets/icons/IconX.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
-import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
+import { CONTACT_LINK } from "@/constants";
 
 const { pathname } = Astro.url;
 
@@ -21,6 +21,13 @@ const isActive = (path: string) => {
 
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
+
+export interface Props {
+  wide?: boolean;
+}
+
+// All pages share the landing width so navigation never reflows the chrome.
+const { wide = true } = Astro.props;
 ---
 
 <header>
@@ -33,7 +40,10 @@ const isActive = (path: string) => {
   </a>
   <div
     id="nav-container"
-    class="mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row"
+    class:list={[
+      "mx-auto flex flex-col items-center justify-between sm:flex-row",
+      wide ? "max-w-6xl" : "max-w-3xl",
+    ]}
   >
     <div
       id="top-nav-wrap"
@@ -41,9 +51,17 @@ const isActive = (path: string) => {
     >
       <a
         href="/"
-        class="absolute py-1 text-2xl leading-7 font-semibold whitespace-nowrap sm:static"
+        class="absolute flex items-center gap-2.5 py-1 whitespace-nowrap sm:static"
       >
-        {SITE.title}
+        <img
+          src="/avatar.jpg"
+          alt=""
+          width="32"
+          height="32"
+          loading="lazy"
+          class="size-8 rounded-lg object-cover shadow-md"
+        />
+        <span class="text-2xl leading-7 font-semibold">{SITE.title}</span>
       </a>
       <nav
         id="nav-menu"
@@ -70,12 +88,15 @@ const isActive = (path: string) => {
         >
           <li class="col-span-2">
             <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-              Posts
+              Blog
             </a>
           </li>
           <li class="col-span-2">
-            <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
-              Tags
+            <a
+              href="/#projects"
+              class:list={{ "active-nav": isActive("/#projects") }}
+            >
+              Projects
             </a>
           </li>
           <li class="col-span-2">
@@ -83,26 +104,14 @@ const isActive = (path: string) => {
               About
             </a>
           </li>
-          {
-            SITE.showArchives && (
-              <li class="col-span-2">
-                <LinkButton
-                  href="/archives"
-                  class:list={[
-                    "focus-outline flex justify-center p-3 sm:p-1",
-                    {
-                      "active-nav [&>svg]:stroke-accent": isActive("/archives"),
-                    },
-                  ]}
-                  ariaLabel="archives"
-                  title="Archives"
-                >
-                  <IconArchive class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Archives</span>
-                </LinkButton>
-              </li>
-            )
-          }
+          <li class="col-span-2">
+            <a
+              href={CONTACT_LINK}
+              class="rounded-full bg-accent px-4 py-3 text-center font-medium text-accent-foreground hover:text-accent-foreground! hover:opacity-90 sm:px-4 sm:py-1"
+            >
+              Get in touch
+            </a>
+          </li>
           <li class="col-span-1 flex items-center justify-center">
             <LinkButton
               href="/search"
@@ -137,7 +146,7 @@ const isActive = (path: string) => {
       </nav>
     </div>
   </div>
-  <Hr />
+  <Hr wide={wide} />
 </header>
 
 <script>
