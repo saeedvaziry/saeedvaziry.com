@@ -159,7 +159,7 @@ export default async post => {
                           fontWeight: "bold",
                           maxHeight: "84%",
                           overflow: "hidden",
-                          fontFamily: "Fraunces",
+                          fontFamily: "Inter",
                         },
                         children: post.data.title,
                       },

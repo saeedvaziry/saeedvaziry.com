@@ -13,9 +13,9 @@
       <line x1="1040" y1="675" x2="1200" y2="515"/>
       <line x1="1120" y1="675" x2="1200" y2="595"/>
     </g>
-  <g font-family="Georgia, 'Times New Roman', serif">
+  <g>
     <text x="96" y="356" font-size="128" font-weight="700" fill="var(--foreground)">Draftila</text>
-    <text x="98" y="418" font-family="Verdana, Geneva, sans-serif" font-size="30" letter-spacing="4" fill="var(--accent)">DRAFTILA.COM</text>
+    <text x="98" y="418" font-size="30" fill="var(--accent)">DRAFTILA.COM</text>
   </g>
   <rect x="1.5" y="1.5" width="1197" height="672" fill="none" stroke="var(--border)" stroke-width="3"/>
 </svg>

@@ -15,7 +15,7 @@ const svgModules = import.meta.glob<string>("/src/assets/projects/*.svg", {
   import: "default",
   eager: true,
 });
-const rasterModules = import.meta.glob<{ default: ImageMetadata }>(
+const rasterModules = import.meta.glob<ImageMetadata>(
   "/src/assets/projects/*.{png,jpg,jpeg,webp,avif}",
   { import: "default", eager: true }
 );
@@ -31,7 +31,22 @@ function projectImage(slug: string) {
     new RegExp(`/${slug}\\.(png|jpe?g|webp|avif)$`).test(key)
   );
   if (rasterKey) {
-    return { kind: "img" as const, src: rasterModules[rasterKey].default.src };
+    return { kind: "img" as const, src: rasterModules[rasterKey].src };
+  }
+  // Theme-aware pair: <slug>-light.* and <slug>-dark.* swap with the site theme.
+  const ext = "(png|jpe?g|webp|avif)";
+  const lightKey = Object.keys(rasterModules).find(key =>
+    new RegExp(`/${slug}-light\\.${ext}$`).test(key)
+  );
+  const darkKey = Object.keys(rasterModules).find(key =>
+    new RegExp(`/${slug}-dark\\.${ext}$`).test(key)
+  );
+  if (lightKey && darkKey) {
+    return {
+      kind: "dual" as const,
+      light: rasterModules[lightKey].src,
+      dark: rasterModules[darkKey].src,
+    };
   }
   return null;
 }
@@ -86,6 +101,23 @@ const groups = GROUP_ORDER.map(group => ({
                   class="block w-full"
                 />
               )}
+              {image?.kind === "dual" && (
+                <Fragment>
+                  <img
+                    src={image.light}
+                    alt={`${project.name} screenshot`}
+                    loading="lazy"
+                    class="block w-full dark:hidden"
+                  />
+                  <img
+                    src={image.dark}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    class="hidden w-full dark:block"
+                  />
+                </Fragment>
+              )}
               <div class="p-5">
                 <h3 class="font-display text-xl text-foreground group-hover:text-accent">
                   {project.name}
@@ -103,7 +135,7 @@ const groups = GROUP_ORDER.map(group => ({
     {
       groups.map(entry => (
         <div>
-          <h3 class="text-sm font-semibold tracking-[0.15em] text-foreground/60 uppercase">
+          <h3 class="text-sm font-semibold text-foreground/60 uppercase">
             {entry.label}
           </h3>
           <ul class="mt-3 divide-y divide-border">

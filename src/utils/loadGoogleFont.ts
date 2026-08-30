@@ -36,14 +36,14 @@ async function loadGoogleFonts(
 > {
   const fontsConfig = [
     {
-      name: "Fraunces",
-      font: "Fraunces",
+      name: "Bricolage Grotesque",
+      font: "Bricolage Grotesque",
       weight: 600,
       style: "normal",
     },
     {
-      name: "Fraunces",
-      font: "Fraunces",
+      name: "Bricolage Grotesque",
+      font: "Bricolage Grotesque",
       weight: 700,
       style: "bold",
     },

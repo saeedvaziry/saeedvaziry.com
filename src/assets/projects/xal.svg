@@ -8,9 +8,9 @@
   </defs>
   <rect width="1200" height="675" fill="url(#bg)"/>
   <path d="M 950 -80 C 1200 -40 1260 240 1060 330 C 900 405 760 260 800 120 C 830 10 850 -95 950 -80 Z" fill="var(--accent)" opacity="0.10"/>
-  <g font-family="Georgia, 'Times New Roman', serif">
+  <g>
     <text x="96" y="356" font-size="128" font-weight="700" fill="var(--foreground)">Xal</text>
-    <text x="98" y="418" font-family="Verdana, Geneva, sans-serif" font-size="30" letter-spacing="4" fill="var(--accent)">XAL.SH</text>
+    <text x="98" y="418" font-size="30" fill="var(--accent)">XAL.SH</text>
   </g>
   <rect x="1.5" y="1.5" width="1197" height="672" fill="none" stroke="var(--border)" stroke-width="3"/>
 </svg>

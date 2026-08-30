@@ -80,7 +80,7 @@ export default async () => {
                               style: {
                                 fontSize: 72,
                                 fontWeight: "bold",
-                                fontFamily: "Fraunces",
+                                fontFamily: "Inter",
                               },
                               children: SITE.title,
                             },

@@ -35,8 +35,10 @@ html[data-theme="dark"] {
   --color-card: var(--card);
   --color-accent-soft: var(--accent-soft);
   --color-accent-foreground: var(--accent-foreground);
-  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
 }
 
 @layer base {
