@@ -12,7 +12,7 @@ import CTA from "@/components/home/CTA.astro";
 
 <Layout>
   <Header wide />
-  <main id="main-content" data-backurl="/">
+  <main id="main-content">
     <Hero />
     <Services />
     <Projects />
@@ -22,14 +22,3 @@ import CTA from "@/components/home/CTA.astro";
   </main>
   <Footer wide />
 </Layout>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const mainContent: HTMLElement | null =
-      document.querySelector("#main-content");
-    const backUrl = mainContent?.dataset?.backurl;
-    if (backUrl) {
-      sessionStorage.setItem("backUrl", backUrl);
-    }
-  });
-</script>
