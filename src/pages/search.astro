@@ -33,9 +33,9 @@ import { SITE } from "@/config";
       // Display warning inn dev mode
       if (import.meta.env.DEV) {
         pageFindSearch.innerHTML = `
-            <div class="bg-muted/75 rounded p-4 space-y-4 mb-4">
+            <div class="bg-muted/75 p-4 space-y-4 mb-4">
               <p><strong>DEV mode Warning! </strong>You need to build the project at least once to see the search results during development.</p>
-              <code class="block bg-black text-white px-2 py-1 rounded">pnpm run build</code>
+              <code class="block bg-black text-white px-2 py-1">pnpm run build</code>
             </div>
           `;
       }
@@ -92,9 +92,9 @@ import { SITE } from "@/config";
     --pagefind-ui-border: var(--border);
     --pagefind-ui-primary: var(--accent);
     --pagefind-ui-tag: var(--background);
-    --pagefind-ui-border-radius: 0.375rem;
+    --pagefind-ui-border-radius: 0;
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 0;
     --pagefind-ui-image-box-ratio: 3 / 2;
 
     form::before {

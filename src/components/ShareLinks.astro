@@ -17,7 +17,7 @@ const URL = Astro.url;
     {
       SHARE_LINKS.map(social => (
         <LinkButton href={`${social.href + URL}`} title={social.linkTitle}>
-          <span class="flex size-10 items-center justify-center rounded-full border border-border bg-card transition-colors group-hover:border-accent group-hover:text-accent">
+          <span class="flex size-10 items-center justify-center border border-border bg-card transition-colors group-hover:border-accent group-hover:text-accent">
             <social.icon class="size-5 fill-transparent stroke-current stroke-2" />
           </span>
           <span class="sr-only">{social.linkTitle}</span>
