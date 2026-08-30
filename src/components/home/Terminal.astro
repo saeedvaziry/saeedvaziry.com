@@ -1,0 +1,760 @@
+---
+/**
+ * Interactive hero terminal.
+ * Boots a scripted session on its own, then hands the keyboard to the
+ * visitor: history, tab completion, clickable links, live theme switching
+ * and a few easter eggs. No frameworks, no rounding.
+ */
+---
+
+<div
+  id="svt-terminal"
+  class="svt-window"
+  role="region"
+  aria-label="Interactive terminal"
+>
+  <div class="svt-titlebar">
+    <span class="svt-dot svt-dot-r"></span>
+    <span class="svt-dot svt-dot-y"></span>
+    <span class="svt-dot svt-dot-g"></span>
+    <span class="svt-title">visitor@saeedvaziry: ~</span>
+    <span class="svt-clock" id="svt-clock">--:--:--</span>
+  </div>
+
+  <div class="svt-body" id="svt-scroll">
+    <div id="svt-out"></div>
+    <div class="svt-line svt-inputline" id="svt-inputline" hidden>
+      <span class="svt-accent">visitor@saeedvaziry</span><span class="svt-dim"
+        >:~$&nbsp;</span
+      ><span id="svt-buffer"></span><span class="svt-cursor" id="svt-cursor"
+      ></span>
+    </div>
+  </div>
+
+  <div class="svt-status">
+    <span>click terminal to type</span>
+    <span>tab completes &middot; &uarr; history</span>
+    <span>bash &middot; utf-8</span>
+  </div>
+
+  <input
+    id="svt-input"
+    class="svt-input"
+    type="text"
+    autocomplete="off"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
+    aria-label="Terminal input"
+  />
+</div>
+
+<script>
+  let clockTimer: ReturnType<typeof setInterval> | undefined;
+
+  function startTerminal(rootEl: HTMLElement) {
+    if (rootEl.dataset.ready) return;
+    rootEl.dataset.ready = "1";
+
+    const scrollEl = rootEl.querySelector<HTMLElement>("#svt-scroll")!;
+    const out = rootEl.querySelector<HTMLElement>("#svt-out")!;
+    const inputLine = rootEl.querySelector<HTMLElement>("#svt-inputline")!;
+    const bufferEl = rootEl.querySelector<HTMLElement>("#svt-buffer")!;
+    const cursorEl = rootEl.querySelector<HTMLElement>("#svt-cursor")!;
+    const input = rootEl.querySelector<HTMLInputElement>("#svt-input")!;
+    const clockEl = rootEl.querySelector<HTMLElement>("#svt-clock")!;
+
+    // Template whitespace between spans renders under pre-wrap; drop it so the
+    // prompt always starts flush with the left edge.
+    [...inputLine.childNodes].forEach(node => {
+      if (
+        node.nodeType === Node.TEXT_NODE &&
+        !(node.textContent ?? "").trim()
+      ) {
+        node.remove();
+      }
+    });
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const startedAt = performance.now();
+
+    let busy = true; // an animation is running, enter is queued
+    let booting = true; // scripted intro still playing
+    let skip = false; // fast-forward requested
+    let history: string[] = [];
+    let histIdx = 0;
+    let draft = "";
+    const queue: string[] = [];
+
+    const sleep = (ms: number) =>
+      skip || reduced
+        ? Promise.resolve()
+        : new Promise<void>(resolve => setTimeout(resolve, ms));
+
+    const toBottom = () => {
+      scrollEl.scrollTop = scrollEl.scrollHeight;
+    };
+
+    function el<K extends keyof HTMLElementTagNameMap>(
+      tag: K,
+      cls: string,
+      text?: string
+    ) {
+      const node = document.createElement(tag);
+      node.className = cls;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function print(text: string, cls = "svt-fg", url?: string) {
+      const line = el("div", "svt-line " + cls);
+      if (url) {
+        const a = el("a", "svt-link", text);
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        line.append(a);
+      } else {
+        line.textContent = text;
+      }
+      out.append(line);
+      toBottom();
+    }
+
+    function printPair(art: string, info: string) {
+      const line = el("div", "svt-line");
+      if (art) {
+        line.append(
+          el("span", "svt-accent", art.padEnd(20)),
+          el("span", "svt-fg", info)
+        );
+      } else {
+        line.append(el("span", "svt-fg", info));
+      }
+      out.append(line);
+      toBottom();
+    }
+
+    function promptLine(cmd?: string) {
+      const line = el("div", "svt-line");
+      line.append(
+        el("span", "svt-accent", "visitor@saeedvaziry"),
+        el("span", "svt-dim", ":~$ ")
+      );
+      const txt = el("span", "svt-fg", cmd ?? "");
+      line.append(txt);
+      out.append(line);
+      toBottom();
+      return txt;
+    }
+
+    async function typeCmd(cmd: string) {
+      const txt = promptLine();
+      const cur = el("span", "svt-cursor");
+      txt.parentElement!.append(cur);
+      for (const ch of cmd) {
+        txt.textContent += ch;
+        toBottom();
+        if (skip || reduced) continue;
+        await sleep(20 + Math.random() * 50);
+      }
+      cur.remove();
+    }
+
+    function uptimeStr() {
+      const s = Math.floor((performance.now() - startedAt) / 1000);
+      const mm = String(Math.floor(s / 60)).padStart(2, "0");
+      const ss = String(s % 60).padStart(2, "0");
+      return `${mm}:${ss}`;
+    }
+
+    const FILES: Record<string, string[]> = {
+      "about.txt": [
+        "saeed vaziry. builds developer tools.",
+        "clis, desktop apps, internal platforms,",
+        "and ai-powered features that ship.",
+        "currently into: terminals and ai agents.",
+      ],
+      "mission.txt": [
+        "build tools developers love.",
+        "keep them fast, simple, and fun.",
+      ],
+      "stack.json": [
+        "{",
+        '  "os": "macos",',
+        '  "editor": "neovim",',
+        '  "shell": "zsh",',
+        '  "languages": ["php", "typescript", "go"],',
+        '  "currently_into": "ai agents"',
+        "}",
+      ],
+    };
+
+    const CONTACTS: [string, string, string][] = [
+      ["email ", "me@saeedvaziry.com", "mailto:me@saeedvaziry.com"],
+      ["github", "github.com/saeedvaziry", "https://github.com/saeedvaziry"],
+      ["x     ", "x.com/saeed_vz", "https://x.com/saeed_vz"],
+    ];
+
+    const PROJECTS: [string, string, string][] = [
+      [
+        "vitodeploy.com",
+        "server management & deployment",
+        "https://vitodeploy.com",
+      ],
+      ["capty.app", "screen capture for macOS", "https://capty.app"],
+      [
+        "muxy",
+        "terminal multiplexer for macOS",
+        "https://github.com/muxy-app/muxy",
+      ],
+      ["xal.sh", "ai coding agent for your terminal", "https://xal.sh"],
+      ["tweakphp.com", "desktop code editor for php", "https://tweakphp.com"],
+      ["freeipapi.com", "free ip geolocation api", "https://freeipapi.com"],
+    ];
+
+    const TARGETS: Record<string, string> = {
+      github: "https://github.com/saeedvaziry",
+      x: "https://x.com/saeed_vz",
+      linkedin: "https://www.linkedin.com/in/saeedvaziry/",
+      mail: "mailto:me@saeedvaziry.com",
+    };
+
+    const COMMANDS = [
+      "help",
+      "whoami",
+      "neofetch",
+      "projects",
+      "ls",
+      "cat",
+      "open",
+      "theme",
+      "coffee",
+      "uptime",
+      "sudo",
+      "clear",
+      "history",
+      "echo",
+      "exit",
+    ];
+
+    const HELP: [string, string][] = [
+      ["", "svt-fg"],
+      ["whoami         who is poking around", "svt-fg"],
+      ["neofetch       system info, but personal", "svt-fg"],
+      ["projects       things i built", "svt-fg"],
+      ["ls / cat       list and read files", "svt-fg"],
+      ["open <target>  github  x  linkedin  mail", "svt-fg"],
+      ["theme <mode>   dark  light  toggle", "svt-fg"],
+      ["coffee         brew one", "svt-fg"],
+      ["uptime         how long you have been here", "svt-fg"],
+      ["sudo hire-me   the good stuff", "svt-fg"],
+      ["clear          clean slate", "svt-fg"],
+      ["", "svt-fg"],
+      ["hint: tab completes, arrows walk history", "svt-dim"],
+      ["", "svt-fg"],
+    ];
+
+    function argPool(cmd: string): string[] {
+      if (cmd === "cat") return [...Object.keys(FILES), "contact.txt"];
+      if (cmd === "open") return Object.keys(TARGETS);
+      if (cmd === "theme") return ["dark", "light", "toggle"];
+      if (cmd === "sudo") return ["hire-me"];
+      return [];
+    }
+
+    function setTheme(mode: string) {
+      const current =
+        document.documentElement.getAttribute("data-theme") ?? "light";
+      if (mode === "toggle") mode = current === "dark" ? "light" : "dark";
+      if (mode !== "dark" && mode !== "light") {
+        print("usage: theme dark | light | toggle", "svt-dim");
+        return;
+      }
+      if (current === mode) {
+        print(`theme is already ${mode}`, "svt-dim");
+        return;
+      }
+      // Route through the header toggle so the site's own state stays in sync.
+      const btn = document.querySelector<HTMLButtonElement>("#theme-btn");
+      if (btn) btn.click();
+      else {
+        document.documentElement.setAttribute("data-theme", mode);
+        localStorage.setItem("theme", mode);
+      }
+      print(`theme -> ${mode}  [ok]`, "svt-accent");
+    }
+
+    async function hireMe() {
+      print("[sudo] password for visitor: ********", "svt-dim");
+      await sleep(550);
+      print("access granted.", "svt-accent");
+      await sleep(450);
+      print("routing you to my inbox...", "svt-fg");
+      window.open("mailto:me@saeedvaziry.com", "_blank");
+      print("(nothing opened? run: open mail)", "svt-dim");
+    }
+
+    async function neofetch() {
+      const art = [
+        "██    ██ ████████",
+        "██    ██ ██      ",
+        "██    ██ ████████",
+        " ██  ██        ██",
+        "  ████   ████████",
+      ];
+      const info = [
+        "visitor@saeedvaziry.com",
+        "-----------------------",
+        "os: saeedvaziry.com (web)",
+        "shell: bash (emulated)",
+        "resolution: " + window.innerWidth + "x" + window.innerHeight,
+        "uptime: " + uptimeStr(),
+        "theme: " +
+          (document.documentElement.getAttribute("data-theme") ?? "light"),
+        "coffee: refilling",
+      ];
+      const rows = Math.max(art.length, info.length);
+      for (let i = 0; i < rows; i++) {
+        printPair(art[i] ?? "", info[i] ?? "");
+        await sleep(40);
+      }
+    }
+
+    async function run(raw: string) {
+      const cmd = raw.trim();
+      const [name = "", ...args] = cmd.split(/\s+/);
+      switch (name) {
+        case "help":
+        case "?":
+          for (const [text, cls] of HELP) {
+            print(text, cls);
+            await sleep(16);
+          }
+          break;
+        case "whoami":
+          print("you are a curious human, most likely a developer.");
+          print("you found the fun part of this site. nice.", "svt-dim");
+          break;
+        case "neofetch":
+          await neofetch();
+          break;
+        case "projects":
+          for (const [nameP, tagline, url] of PROJECTS) {
+            const line = el("div", "svt-line");
+            const link = el("a", "svt-link", nameP);
+            link.href = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            line.append(link, el("span", "svt-dim", "  " + tagline));
+            out.append(line);
+            toBottom();
+            await sleep(70);
+          }
+          print("full list -> ", "svt-dim", TARGETS.github);
+          break;
+        case "ls":
+          print(
+            "about.txt  contact.txt  mission.txt  stack.json  projects/",
+            "svt-fg"
+          );
+          break;
+        case "cat": {
+          const file = args[0] ?? "";
+          if (file === "contact.txt") {
+            for (const [label, text, url] of CONTACTS) {
+              const line = el("div", "svt-line");
+              line.append(
+                el("span", "svt-dim", label + "  ->  "),
+                el("a", "svt-link", text)
+              );
+              const a = line.querySelector("a")!;
+              a.href = url;
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              out.append(line);
+              toBottom();
+            }
+          } else if (FILES[file]) {
+            for (const l of FILES[file]) {
+              print(l);
+              await sleep(30);
+            }
+          } else {
+            print(`cat: ${file || "?"}: no such file (try: ls)`, "svt-dim");
+          }
+          break;
+        }
+        case "open": {
+          const target = args[0] ?? "";
+          const url = TARGETS[target];
+          if (!url) {
+            print(
+              "open: unknown target (github  x  linkedin  mail)",
+              "svt-dim"
+            );
+          } else {
+            print(`opening ${target} -> `, "svt-fg", url);
+            window.open(url, "_blank", "noopener");
+          }
+          break;
+        }
+        case "theme":
+          setTheme(args[0] ?? "toggle");
+          break;
+        case "coffee":
+          print("        ) )");
+          print("       ( (");
+          print("     .........", "svt-accent");
+          print("     |       |]", "svt-accent");
+          print("     \\       /", "svt-accent");
+          print("      `-----'", "svt-accent");
+          print("fresh pot. careful, it's hot.", "svt-dim");
+          break;
+        case "uptime":
+          print(
+            `session uptime ${uptimeStr()}  ·  bugs fixed: 0  ·  bugs created: ∞`
+          );
+          break;
+        case "sudo":
+          if (args[0] === "hire-me") await hireMe();
+          else print("sudo: only 'sudo hire-me' is allowed here", "svt-dim");
+          break;
+        case "clear":
+          out.textContent = "";
+          break;
+        case "history":
+          history.forEach((h, i) => print(`${i + 1}.  ${h}`, "svt-dim"));
+          break;
+        case "echo":
+          print(args.join(" "));
+          break;
+        case "exit":
+        case "quit":
+        case "logout":
+          print("there is no exit. only ship.");
+          break;
+        case "vim":
+        case "nvim":
+          print("you are already inside vim. you just can't leave.");
+          break;
+        case "rm":
+          print("nice try. this site is immutable.");
+          break;
+        case "":
+          break;
+        default:
+          print(`command not found: ${name}`, "svt-fg");
+          print("try 'help'", "svt-dim");
+      }
+    }
+
+    async function submit(raw: string) {
+      promptLine(raw);
+      const cmd = raw.trim();
+      if (!cmd) return;
+      // Record exactly once, even when the command lands in the queue.
+      history.push(cmd);
+      histIdx = history.length;
+      draft = "";
+      if (busy) {
+        queue.push(cmd);
+        return;
+      }
+      busy = true;
+      cursorEl.classList.add("svt-cursor-busy");
+      await run(cmd);
+      cursorEl.classList.remove("svt-cursor-busy");
+      busy = false;
+      while (queue.length) {
+        await run(queue.shift()!);
+      }
+      histIdx = history.length;
+      toBottom();
+    }
+
+    function complete() {
+      const value = input.value;
+      const parts = value.split(/\s+/);
+      const last = parts[parts.length - 1] ?? "";
+      const pool =
+        parts.length <= 1 ? COMMANDS : argPool(parts[0].toLowerCase());
+      const matches = pool.filter(p => p.startsWith(last));
+      if (matches.length === 1) {
+        parts[parts.length - 1] = matches[0];
+        input.value = parts.join(" ") + (parts.length === 1 ? " " : "");
+      } else if (matches.length > 1) {
+        // Only echo the prompt when something was typed; an empty Tab just
+        // lists what is available.
+        if (value.trim()) promptLine(value);
+        print(matches.join("   "), "svt-dim");
+      }
+      bufferEl.textContent = input.value;
+    }
+
+    function endBoot() {
+      if (booting) skip = true;
+    }
+
+    input.addEventListener("input", () => {
+      bufferEl.textContent = input.value;
+      toBottom();
+      endBoot();
+    });
+
+    input.addEventListener("keydown", e => {
+      endBoot();
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const value = input.value;
+        input.value = "";
+        bufferEl.textContent = "";
+        submit(value);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        // Leaving the fresh prompt: remember unsent text so ArrowDown can restore it.
+        if (histIdx === history.length) draft = input.value;
+        if (histIdx > 0) {
+          histIdx -= 1;
+          input.value = history[histIdx] ?? "";
+        }
+        bufferEl.textContent = input.value;
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (histIdx < history.length) {
+          histIdx += 1;
+          input.value = history[histIdx] ?? draft;
+          if (histIdx === history.length) draft = "";
+        }
+        bufferEl.textContent = input.value;
+      } else if (e.key === "Tab") {
+        e.preventDefault();
+        complete();
+      } else if (e.ctrlKey && e.key === "l") {
+        e.preventDefault();
+        out.textContent = "";
+      } else if (e.ctrlKey && e.key === "c") {
+        promptLine(input.value + "^C");
+        input.value = "";
+        bufferEl.textContent = "";
+        toBottom();
+      }
+    });
+
+    rootEl.addEventListener("click", () => {
+      endBoot();
+      input.focus({ preventScroll: true });
+    });
+
+    const tick = () => {
+      clockEl.textContent = new Date().toLocaleTimeString([], {
+        hour12: false,
+      });
+    };
+    tick();
+    clockTimer = setInterval(tick, 1000);
+
+    async function bootSequence() {
+      print(`Last login: ${new Date().toDateString()} on ttys001`, "svt-dim");
+      await sleep(600);
+      await typeCmd("whoami");
+      print("saeed · software engineer · tool maker");
+      await sleep(400);
+      await typeCmd("cat mission.txt");
+      print("build tools developers love.");
+      print("keep them fast, simple, and fun.");
+      await sleep(400);
+      await typeCmd("./handover --keyboard");
+      await sleep(500);
+      print("ok. the keyboard is yours now.", "svt-dim");
+      print("type 'help' to explore.", "svt-dim");
+      booting = false;
+      skip = false;
+      busy = false;
+      inputLine.hidden = false;
+      toBottom();
+    }
+
+    bootSequence();
+  }
+
+  const root = document.getElementById("svt-terminal");
+  if (root) startTerminal(root);
+
+  document.addEventListener("astro:after-swap", () => {
+    if (clockTimer) {
+      clearInterval(clockTimer);
+      clockTimer = undefined;
+    }
+    const nextRoot = document.getElementById("svt-terminal");
+    if (nextRoot) startTerminal(nextRoot);
+  });
+</script>
+
+<style is:global>
+  .svt-window {
+    position: relative;
+    border: 1px solid var(--border);
+    background: #181310;
+    color: #e8dcc4;
+    box-shadow: 8px 8px 0 0 var(--border);
+    font-family:
+      var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Subtle CRT scanlines */
+  .svt-window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .svt-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: #100c09;
+    border-bottom: 1px solid #2a221a;
+  }
+
+  .svt-dot {
+    width: 11px;
+    height: 11px;
+    flex: none;
+  }
+  .svt-dot-r {
+    background: #cf6a5b;
+  }
+  .svt-dot-y {
+    background: #d9a862;
+  }
+  .svt-dot-g {
+    background: #85a565;
+  }
+
+  .svt-title {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #8f8172;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .svt-clock {
+    font-size: 11px;
+    color: #8f8172;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .svt-body {
+    height: 400px;
+    overflow-y: auto;
+    padding: 16px 16px 20px;
+    font-size: 13px;
+    line-height: 1.55;
+    scrollbar-width: thin;
+    scrollbar-color: #3a3128 transparent;
+  }
+
+  .svt-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 1.55em;
+  }
+
+  .svt-fg {
+    color: #e8dcc4;
+  }
+  .svt-dim {
+    color: #948876;
+  }
+  .svt-accent {
+    color: #e29a63;
+    text-shadow: 0 0 10px rgba(226, 154, 99, 0.25);
+  }
+
+  .svt-link {
+    color: #e29a63;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .svt-link:hover {
+    color: #f0b57f;
+  }
+
+  .svt-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    margin-left: 1px;
+    vertical-align: -2px;
+    background: #e29a63;
+    animation: svt-blink 1.1s steps(2, start) infinite;
+  }
+  .svt-cursor-busy {
+    animation: none;
+  }
+
+  @keyframes svt-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .svt-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 14px;
+    background: #100c09;
+    border-top: 1px solid #2a221a;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8f8172;
+  }
+
+  .svt-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  @media (max-width: 640px) {
+    .svt-body {
+      height: 300px;
+      font-size: 12px;
+    }
+    .svt-status span:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svt-cursor {
+      animation: none;
+    }
+  }
+</style>
